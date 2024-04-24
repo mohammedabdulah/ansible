@@ -2,9 +2,9 @@ name: ansible practice
 hosts: web
 become: yes
 tasks:
-- name: install {{item}}
+- name: install "{{ item }}"
   ansible.builtin.package:
-    name: {{item}}
+    name: "{{ item }}"
     state: present
   loop:
   - nginx
