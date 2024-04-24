@@ -1,39 +1,39 @@
-name: ansible practice
-hosts: web
-become: yes
-tasks:
-- name: install "{{ item }}"
-  ansible.builtin.package:
-    name: "{{ item }}"
+- name: ansible practice
+  hosts: web
+  become: yes
+  tasks:
+  - name: install "{{ item }}"
+    ansible.builtin.package:
+      name: "{{ item }}"
     state: present
-  loop:
-  - nginx
-  - git
-  - mysql
+    loop:
+    - nginx
+    - git
+    - mysql
 
-- name: start "{{ item }}"
-  ansible.builtin.service:
-    name: "{{ item }}"
+  - name: start "{{ item }}"
+    ansible.builtin.service:
+      name: "{{ item }}"
     state: started
-  loop:
-  - nginx
-  - git
-  - mysql
+    loop:
+    - nginx
+    - git
+    - mysql
 
-- name: check if user roboshop available
-  ansible.builtin.command: id roboshop
-  register: user
-  ignore_errors: true
+  - name: check if user roboshop available
+    ansible.builtin.command: id roboshop
+    register: user
+    ignore_errors: true
 
-- name: print variable value
-  ansible.builtin.debug:
-    msg: "user output is : {{user}}"
+  - name: print variable value
+    ansible.builtin.debug:
+      msg: "user output is : {{user}}"
 
-- name: print exit status or return code
-  ansible.builtin.debug:
-    msg: "staus is {{user.rc}}"
+  - name: print exit status or return code
+    ansible.builtin.debug:
+      msg: "staus is {{user.rc}}"
 
-- name: create user
-  ansible.builtin.user:
-    name: roboshop
-  when: user.rc!0 = 0
+  - name: create user
+    ansible.builtin.user:
+      name: roboshop
+    when: user.rc!0 = 0
