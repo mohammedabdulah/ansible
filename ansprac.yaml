@@ -11,9 +11,9 @@ tasks:
   - git
   - mysql
 
-- name: start {{item}}
+- name: start "{{item}}"
   ansible.builtin.service:
-    name: {{item}}
+    name: "{{item}}"
     state: started
   loop:
   - nginx
